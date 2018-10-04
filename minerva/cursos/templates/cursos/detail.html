@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{curso.nombre}}{% endblock %}
+{% block subtitle %}Ficha del curso{% endblock subtitle %}
+
+{% block main %}
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Nombre</th>
+              <td>{{curso.nombre}}</td>
+            </tr>
+            <tr>
+              <th>Fecha de inicio</th>
+              <td>{{curso.fecha_inicio}}</td>
+            </tr>
+            <tr>
+              <th>Fecha de fin</th>
+              <td>{{curso.fecha_fin}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Horario</th>
+              <td>{{curso.get_horario_display}}</td>
+            </tr>
+            <tr>
+              <th>Modalidad</th>
+              <td>{{curso.modalidad.nombre}}</td>
+            </tr>
+            <tr>
+              <th>Plazas</th>
+              <td>{{curso.plazas}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <a href="{% url "cursos:nuevo_alumno" curso.id %}" class="float-right btn btn-success"><span class="oi oi-plus"></span> Nuevo alumno</a>          
+          <h3>Listado de alumnos matriculados</h3>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Fecha de matrícula</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for alumno in curso.alumnomatriculado_set.all %}
+            <tr>
+              <td>{{alumno.nombre}}</td>
+              <td>{{alumno.apellidos}}</td>
+              <td>{{alumno.fecha_matricula|date:"d/m/Y"}}</td>
+              <td>
+                  <a href="{% url "cursos:editar_alumno" curso.id alumno.id %}" class="btn text-warning"><span class="oi oi-pencil"></span></a> 
+                  <a href="{% url "cursos:borrar_alumno" curso.id alumno.id %}" class="btn text-danger"><span class="oi oi-trash"></span></a> 
+              </td>
+            </tr>{% endfor %}
+          </tbody>
+        </table>
+      </div>      
+    </div>
+  </div>
+
+{% endblock main %}

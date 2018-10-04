@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Cursos{% endblock %}
+{% block subtitle %}Nuevo curso{% endblock subtitle %}
+
+{% block main %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <form action="." method="POST">      
+        {% csrf_token %}
+        <div class="card">
+          <div class="card-header">
+            <h5>Nuevo curso</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.nombre.label_tag}}
+                  {{form.nombre|add_class:"form-control"}}
+                  {{form.nombre.errors}}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.modalidad.label_tag}}
+                  {{form.modalidad|add_class:"form-control"}}
+                  {{form.modalidad.errors}}
+                </div>
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.fecha_inicio.label_tag}}
+                  {{form.fecha_inicio|add_class:"form-control"}}
+                  {{form.fecha_inicio.errors}}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.fecha_fin.label_tag}}
+                  {{form.fecha_fin|add_class:"form-control"}}
+                  {{form.fecha_fin.errors}}
+                </div>
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.modalidad.label_tag}}
+                  {{form.modalidad|add_class:"form-control"}}
+                  {{form.modalidad.errors}}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.horas.label_tag}}
+                  {{form.horas|add_class:"form-control"}}
+                  {{form.horas.errors}}
+                </div>
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.plazas.label_tag}}
+                  {{form.plazas|add_class:"form-control"}}
+                  {{form.plazas.errors}}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  {{form.horario.label_tag}}
+                  {{form.horario|add_class:"form-control"}}
+                  {{form.horario.errors}}
+                </div>
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-check">
+                  {{form.subvencionado}}
+                  <label class="form-check-label" for="{{form.subvencionado.id_for_label}}">Subvencionado</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock main %}
+
+{% block scripts %}
+
+{% endblock scripts %}

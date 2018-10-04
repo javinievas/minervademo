@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Cursos{% endblock %}
+{% block subtitle %}Listado de cursos{% endblock subtitle %}
+
+{% block main %}
+
+  <div class="row">
+    <div class="col-md-12">
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a href="./" class="btn btn-secondary">Todos</a>
+          {% for modalidad in modalidades %}
+          <a href="?modalidad={{modalidad.id}}" class="btn btn-secondary">{{modalidad.nombre}}</a>
+          {% endfor %}
+        </div>        
+      <div class="card mt-3">
+        <div class="card-header">
+          <a href="{% url "cursos:nuevo" %}" class="float-right btn btn-success"><span class="oi oi-plus"></span> Nuevo curso</a>
+          <h2>Listado de cursos</h2>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Fecha inicio</th>
+              <th>Fecha fin</th>
+              <th>Plazas</th>
+              <th>Plazas (Porc)</th>
+              <th>Modalidad</th>
+              <th>Horas</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for curso in cursos %}
+            <tr>
+              <td>{{curso.nombre}}</td>
+              <td>{{curso.fecha_inicio|date:"d/m/Y"}}</td>
+              <td>{{curso.fecha_fin|date:"d/m/Y"}}</td>
+              <td>{{curso.porcentaje_plazas}}% ({{curso.plazas}})</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{curso.porcentaje_plazas}}" style="width: {{curso.porcentaje_plazas}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </td>
+              <td>{{curso.modalidad.nombre}}</td>
+              <td>{{curso.horas}}</td>
+              <td>
+                <div class="btn-group">
+                  <a href="{% url "cursos:detail" curso.id %}" class="btn text-primary"><span class="oi oi-eye"></span></a> 
+                  <a href="{% url "cursos:editar" curso.id %}" class="btn text-warning"><span class="oi oi-pencil"></span></a> 
+                  <a href="{% url "cursos:borrar" curso.id %}" class="btn text-danger"><span class="oi oi-trash"></span></a> 
+                </div>
+              </td>
+            </tr>{% endfor %}
+          </tbody>
+        </table>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+  </div>
+
+{% endblock main %}

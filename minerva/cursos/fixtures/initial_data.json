@@ -1,0 +1,1 @@
+[{"model": "cursos.modalidad", "pk": 1, "fields": {"nombre": "Presencial"}}, {"model": "cursos.modalidad", "pk": 2, "fields": {"nombre": "Teleformacion"}}]

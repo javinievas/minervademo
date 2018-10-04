@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Minerva{% endblock %}
+{% block subtitle %}Que mina hierbas{% endblock subtitle %}
+
+{% block main %}
+    
+          <div class="row">
+              <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Próximos cursos</h5>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Fecha de inicio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for curso in proximos %}
+                            <tr>
+                                <td>{{curso.nombre}}</td>
+                                <td>{{curso.fecha_inicio|date:"d/m/Y"}}</td>
+                            </tr>{% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="card-footer">
+                        <a href="{% url "cursos:list" %}" class="btn btn-primary">Ver todos los cursos</a>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                  
+              </div>
+          </div>
+          
+{% endblock main %}

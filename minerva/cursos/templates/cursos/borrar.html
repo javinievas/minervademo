@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{curso.nombre}}{% endblock %}
+{% block subtitle %}Borrar curso{% endblock subtitle %}
+
+{% block main %}
+
+  <div class="alert alert-danger">
+    <h3><span class="oi oi-trash"></span> Atención</h3>
+    <p>¿Estás seguro de que deseas borrar?</p>
+
+    <form action="." method="POST" class="float-right">
+      {% csrf_token %}
+      <button class="btn btn-danger" type="submit"><span class="oi oi-trash"></span> Borrar</button>
+    </form>      
+    <a href="{% url "cursos:list" %}" class="btn btn-secondary"><span class="oi oi-chevron-left"></span> Cancelar y volver</a>
+  </div>
+  
+{% endblock main %}
