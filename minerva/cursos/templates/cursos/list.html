@@ -18,6 +18,7 @@
         <div class="card-header">
           <a href="{% url "cursos:nuevo" %}" class="float-right btn btn-success"><span class="oi oi-plus"></span> Nuevo curso</a>
           <h2>Listado de cursos</h2>
+          <p>Hay {{cursos.count}} curso{{cursos.count|pluralize}}</p>
         </div>
         <table class="table">
           <thead>
@@ -28,6 +29,7 @@
               <th>Plazas</th>
               <th>Plazas (Porc)</th>
               <th>Modalidad</th>
+              <th>Subvencionado</th>
               <th>Horas</th>
               <th>Acciones</th>
             </tr>
@@ -45,6 +47,7 @@
                 </div>
               </td>
               <td>{{curso.modalidad.nombre}}</td>
+              <td align="center"><span class="text-{{curso.subvencionado|yesno:"success,danger"}} oi oi-{{curso.subvencionado|yesno:"check,x"}}"></span></td>
               <td>{{curso.horas}}</td>
               <td>
                 <div class="btn-group">

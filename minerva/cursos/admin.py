@@ -3,7 +3,11 @@ from django.contrib import admin
 from .models import *
 
 
-admin.site.register(Modalidad)
+class ModalidadAdmin(admin.ModelAdmin):
+    search_fields = ["nombre", ]
+
+admin.site.register(Modalidad, ModalidadAdmin)
+
 
 class AlumnoMatriculadoInline(admin.TabularInline):
     model = AlumnoMatriculado

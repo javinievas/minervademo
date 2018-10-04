@@ -16,6 +16,7 @@ def cursos(request):
     qs = Curso.objects.all()
     modalidades = Modalidad.objects.all()
     modalidad_filtrada = request.GET.get("modalidad", None)
+
     if modalidad_filtrada:
         qs = qs.filter(modalidad__id=modalidad_filtrada)
     return render(request, "cursos/list.html", {
@@ -34,7 +35,7 @@ def curso_nuevo(request):
     else:
         form = CursoForm()
 
-    return render(request, "cursos/nuevo.html", {"form": form})
+    return render(request, "cursos/nuevo.html", {"form": form,  "title":"Nuevo curso"})
 
 
 def curso_detail(request, id):
@@ -45,7 +46,19 @@ def curso_detail(request, id):
         })
 
 def curso_editar(request, id):
-    return HttpResponse("detalle editar")
+    obj = get_object_or_404(Curso, id=id)
+
+    if request.method == "POST":
+        form = CursoForm(request.POST, instance=obj)
+        if form.is_valid():
+            obj = form.save()
+            messages.add_message(request, messages.INFO, 'Curso actualizado correctamente')
+            return redirect("cursos:detail", id=obj.id)
+    else:
+        form = CursoForm(instance=obj)
+
+    return render(request, "cursos/nuevo.html", {"form": form, "title":"Editar curso"})
+
 
 def curso_borrar(request, id):
     obj = get_object_or_404(Curso, id=id)
@@ -63,7 +76,21 @@ def curso_borrar(request, id):
 
 
 def curso_nuevo_alumno(request, id):
-    pass
+    curso = get_object_or_404(Curso, id=id)
+
+    if request.method == "POST":
+        form = AlumnoForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.curso = curso
+            obj.save()
+            messages.add_message(request, messages.INFO, 'Alumno creado correctamente')
+            return redirect("cursos:detail", id=curso.id)
+    else:
+        form = AlumnoForm()
+
+    return render(request, "cursos/nuevo_alumno.html", {"form": form,  "title":"Nuevo alumno"})
+
 
 def curso_editar_alumno(request, id, alumno_id):
     pass

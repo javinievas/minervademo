@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 {% block title %}Cursos{% endblock %}
-{% block subtitle %}Nuevo curso{% endblock subtitle %}
+{% block subtitle %}{{title}}{% endblock subtitle %}
 
 {% block main %}
 
@@ -12,24 +12,17 @@
         {% csrf_token %}
         <div class="card">
           <div class="card-header">
-            <h5>Nuevo curso</h5>
+            <h5>{{title}}</h5>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   {{form.nombre.label_tag}}
                   {{form.nombre|add_class:"form-control"}}
                   {{form.nombre.errors}}
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{form.modalidad.label_tag}}
-                  {{form.modalidad|add_class:"form-control"}}
-                  {{form.modalidad.errors}}
-                </div>
-              </div>              
+              </div>            
             </div>
             <div class="row">
               <div class="col-md-6">

@@ -9,6 +9,7 @@ class Modalidad(models.Model):
 
     class Meta:
         verbose_name_plural='Modalidades'
+        ordering = ("nombre", )
 
 
 class Curso(models.Model):
